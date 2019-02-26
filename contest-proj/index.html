@@ -1,0 +1,808 @@
+<!doctype html>
+<html class="no-js" lang="ES">
+
+<!--@author Andy J. Rivas Franco (ajrfranco88@gmail.com)-->
+<!--@version 1.0-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Contest for Braimix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <style>
+    #loading-page {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1080;
+      background-color: white;
+    }
+  </style>
+
+  <script>
+    window.onload = function () {
+      document.getElementById("loading-page").style.display = "none"
+    }
+  </script>
+</head>
+
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+  your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<div id="loading-page">
+  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+  <svg width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#a9b5ff"
+       style="    transform: scale(.3);">
+    <circle cx="15" cy="15" r="15">
+      <animate attributeName="r" from="15" to="15"
+               begin="0s" dur="0.8s"
+               values="15;9;15" calcMode="linear"
+               repeatCount="indefinite"/>
+      <animate attributeName="fill-opacity" from="1" to="1"
+               begin="0s" dur="0.8s"
+               values="1;.5;1" calcMode="linear"
+               repeatCount="indefinite"/>
+    </circle>
+    <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+      <animate attributeName="r" from="9" to="9"
+               begin="0s" dur="0.8s"
+               values="9;15;9" calcMode="linear"
+               repeatCount="indefinite"/>
+      <animate attributeName="fill-opacity" from="0.5" to="0.5"
+               begin="0s" dur="0.8s"
+               values=".5;1;.5" calcMode="linear"
+               repeatCount="indefinite"/>
+    </circle>
+    <circle cx="105" cy="15" r="15">
+      <animate attributeName="r" from="15" to="15"
+               begin="0s" dur="0.8s"
+               values="15;9;15" calcMode="linear"
+               repeatCount="indefinite"/>
+      <animate attributeName="fill-opacity" from="1" to="1"
+               begin="0s" dur="0.8s"
+               values="1;.5;1" calcMode="linear"
+               repeatCount="indefinite"/>
+    </circle>
+  </svg>
+</div>
+<div id="fixed-nav-bar">
+  <div id="container-bar">
+    <svg id="icon-app-reduced" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.05 32.48">
+      <path style="fill: #e2e2e2;"
+            d="M29.34,2.44a13.8,13.8,0,1,1-13.8,13.8,13.81,13.81,0,0,1,13.8-13.8m0-2.44A16.24,16.24,0,0,0,13.1,16.24h0a16.24,16.24,0,0,0,32.48,0h0A16.24,16.24,0,0,0,29.34,0Z"></path>
+      <path style="fill: #e2e2e2;"
+            d="M1.22,25.93a1.22,1.22,0,0,1-.15-2.44L50.9,17.35a1.21,1.21,0,0,1,1.36,1.06,1.22,1.22,0,0,1-1.06,1.36L1.37,25.92Z"></path>
+      <path style="fill: #e2e2e2;"
+            d="M30.91,18a1.22,1.22,0,0,1-.15-2.44l29.91-3.69a1.22,1.22,0,0,1,.3,2.43L31.06,18Z"></path>
+    </svg>
+  </div>
+</div>
+<div id="contest-page-container" class="fluid-container">
+  <div class="row" id="contestApp">
+    <div class="empty-state" style="height: calc(100vh - 70px);" v-if="emptyStateShow">
+      <div class="left-section" v-if="step === 'I'">
+        <div id="step-one-contest">
+          <template v-if="subStep === 'a'">
+            <div class="header-step" id="header-step-one">
+              <div>
+                <h4>Invita a nuevos usuarios por correo y gana una recarga de Etecsa
+                  <svg class="emoticon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                    <path fill="#FFCC4D"
+                          d="M36 18c0 9.941-8.059 18-18 18-9.94 0-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/>
+                    <path fill="#664500"
+                          d="M16 18c-.419 0-.809-.265-.949-.684C14.848 16.717 14.034 15 13 15c-1.062 0-1.888 1.827-2.051 2.316-.175.523-.738.808-1.265.632-.524-.174-.807-.741-.632-1.265C9.177 16.307 10.356 13 13 13s3.823 3.307 3.949 3.684c.175.524-.108 1.091-.632 1.265-.106.034-.213.051-.317.051zm10 0c-.419 0-.809-.265-.948-.684C24.849 16.717 24.033 15 23 15c-1.062 0-1.889 1.827-2.052 2.316-.175.523-.736.808-1.265.632-.523-.174-.807-.741-.632-1.265C19.177 16.307 20.355 13 23 13s3.823 3.307 3.948 3.684c.175.524-.108 1.091-.632 1.265-.105.034-.212.051-.316.051zm-8 4c-3.623 0-6.027-.422-9-1-.679-.131-2 0-2 2 0 4 4.595 9 11 9 6.404 0 11-5 11-9 0-2-1.321-2.132-2-2-2.973.578-5.377 1-9 1z"/>
+                    <path fill="#FFF" d="M9 23s3 1 9 1 9-1 9-1-1.344 6.75-9 6.75S9 23 9 23z"/>
+                    <path fill="#664500"
+                          d="M18 27.594c-3.596 0-6.272-.372-7.937-.745l-.825-1.871c.823.312 3.889.897 8.763.897 4.954 0 8.037-.616 8.864-.938l-.701 1.842c-1.634.38-4.419.815-8.164.815z"/>
+                  </svg>
+                  <svg class="emoticon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                    <path fill="#FFDB5E"
+                          d="M34.956 17.916c0-.503-.12-.975-.321-1.404-1.341-4.326-7.619-4.01-16.549-4.221-1.493-.035-.639-1.798-.115-5.668.341-2.517-1.282-6.382-4.01-6.382-4.498 0-.171 3.548-4.148 12.322-2.125 4.688-6.875 2.062-6.875 6.771v10.719c0 1.833.18 3.595 2.758 3.885C8.195 34.219 7.633 36 11.238 36h18.044c1.838 0 3.333-1.496 3.333-3.334 0-.762-.267-1.456-.698-2.018 1.02-.571 1.72-1.649 1.72-2.899 0-.76-.266-1.454-.696-2.015 1.023-.57 1.725-1.649 1.725-2.901 0-.909-.368-1.733-.961-2.336.757-.611 1.251-1.535 1.251-2.581z"/>
+                    <path fill="#EE9547"
+                          d="M23.02 21.249h8.604c1.17 0 2.268-.626 2.866-1.633.246-.415.109-.952-.307-1.199-.415-.247-.952-.108-1.199.307-.283.479-.806.775-1.361.775h-8.81c-.873 0-1.583-.71-1.583-1.583s.71-1.583 1.583-1.583H28.7c.483 0 .875-.392.875-.875s-.392-.875-.875-.875h-5.888c-1.838 0-3.333 1.495-3.333 3.333 0 1.025.475 1.932 1.205 2.544-.615.605-.998 1.445-.998 2.373 0 1.028.478 1.938 1.212 2.549-.611.604-.99 1.441-.99 2.367 0 1.12.559 2.108 1.409 2.713-.524.589-.852 1.356-.852 2.204 0 1.838 1.495 3.333 3.333 3.333h5.484c1.17 0 2.269-.625 2.867-1.632.247-.415.11-.952-.305-1.199-.416-.245-.953-.11-1.199.305-.285.479-.808.776-1.363.776h-5.484c-.873 0-1.583-.71-1.583-1.583s.71-1.583 1.583-1.583h6.506c1.17 0 2.27-.626 2.867-1.633.247-.416.11-.953-.305-1.199-.419-.251-.954-.11-1.199.305-.289.487-.799.777-1.363.777h-7.063c-.873 0-1.583-.711-1.583-1.584s.71-1.583 1.583-1.583h8.091c1.17 0 2.269-.625 2.867-1.632.247-.415.11-.952-.305-1.199-.417-.246-.953-.11-1.199.305-.289.486-.799.776-1.363.776H23.02c-.873 0-1.583-.71-1.583-1.583s.709-1.584 1.583-1.584z"/>
+                  </svg>
+                </h4>
+                <p>Cuéntales a tus amigos sobre nosotros utilizando tu cuenta de Gmail y gana premios en Braimix.
+                  Consultar el ranking general en todo momento.</p>
+                <div>
+                  <div class="btn-area" v-on:click="goAhead('I', 'b')">
+                    <button class="btn-border-gradient">Comenzar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div class="header-step" id="header-step-two">
+              <div>
+                <h4>Antes de comenzar</h4>
+                <p>Escribe la dirección de correo electrónico asociada a tu cuenta de Google</p>
+                <div id="container-form">
+                  <input autofocus type="email"
+                         class="form-control capitalize ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-touched"
+                         placeholder="example@gmail.com" required="" autocomplete="off"
+                         name="mail" ng-minlength="5" ng-maxlength="50" maxlength="50">
+                  <div class="options-btns">
+                    <div class="btn-area" v-on:click="goAhead('II', 'c'), generateConf()">
+                      <button class="btn-border-gradient">Enviar</button>
+                    </div>
+                    <div class="btn-area gray" v-on:click="goAhead('I', 'a')">
+                      <button class="btn-border-gradient">Regresar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <div class="body-step-one" id="wrapper-conffeti">
+            <div class="medal-section">
+              <div class="medal silver">
+                <svg xmlns="http://www.w3.org/2000/svg" width="58" height="82.49" viewBox="0 0 58 82.49">
+                  <polygon points="34.35 0 17.25 31.76 36.37 31.57 40.87 31.91 57.95 0 34.35 0" style="fill: #c8c8cc"/>
+                  <polygon points="38.25 0 21.16 31.76 37 31.76 54.05 0 38.25 0" style="fill: #fff"/>
+                  <path
+                    d="M45.83,39.49V31.57a3.64,3.64,0,0,0-3.63-3.63H16.25a3.63,3.63,0,0,0-3.63,3.63h0v7.91A24.7,24.7,0,1,0,53.9,57.79,24.31,24.31,0,0,0,45.83,39.49ZM16,31.57a.27.27,0,0,1,.25-.28h26a.26.26,0,0,1,.28.25h0v5.35a24.72,24.72,0,0,0-26.49,0Z"
+                    style="fill: #bfbfbf"/>
+                  <circle cx="29.25" cy="57.79" r="19.35" style="fill: #a8a8a8"/>
+                  <path d="M31.14,48H22.72v4.63h8.42v3H22.72V67.66h13v-4.6H27.3v-3h8.42V48Z" style="fill: #fff"/>
+                  <path d="M36.77,31.89H20.94L3.7,0h16Z" style="fill: #fff"/>
+                  <polygon points="40.87 31.91 23.73 0 19.56 0 36.74 31.91 40.87 31.91" style="fill: #c8c8cc"/>
+                  <polygon points="3.72 0 0.1 0 17.22 31.91 20.89 31.91 3.72 0" style="fill: #c8c8cc"/>
+                  <path
+                    d="M29.25,41.5A19.33,19.33,0,0,1,48.49,59.29a13.56,13.56,0,0,0,.06-1.56,19.33,19.33,0,1,0-38.65.06h0c0,.52,0,1,0,1.56A19.41,19.41,0,0,1,29.25,41.5Z"
+                    style="fill: #878787;opacity: 0.41999998688697815;isolation: isolate"/>
+                </svg>
+                <div class="text-footer">
+                  <h3 class="silver">10 horas</h3>
+                  <p>de Internet en tu cuenta Nauta</p>
+                </div>
+              </div>
+              <div class="medal gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="85.33" viewBox="0 0 60 85.33">
+                  <path d="M17.81,33h4l.66-1.25,14.86.14L37.91,33H42.3L60,0H35.73Z" style="fill: #6b6bd1"/>
+                  <path d="M21.87,33H38.26L56,0H39.64Z" style="fill: #fff"/>
+                  <path
+                    d="M43.39,49.68H16.56A3.76,3.76,0,0,1,12.81,46V32.66a3.75,3.75,0,0,1,3.71-3.75H43.39a3.75,3.75,0,0,1,3.8,3.69V45.93a3.75,3.75,0,0,1-3.75,3.75ZM16.56,32.37a.27.27,0,0,0-.28.25h0V45.93a.26.26,0,0,0,.23.28H43.39a.29.29,0,0,0,.3-.25h0V32.66a.28.28,0,0,0-.25-.29Z"
+                    style="fill: #ffbf1c"/>
+                  <circle cx="30.01" cy="59.77" r="25.56" style="fill: #ffbf1c"/>
+                  <circle cx="30.01" cy="59.77" r="20.02" style="fill: #efa500"/>
+                  <path
+                    d="M30,42.76A20,20,0,0,1,49.91,61.2,14.62,14.62,0,0,0,50,59.58a20,20,0,0,0-40,.07,14.62,14.62,0,0,0,.06,1.62A20,20,0,0,1,30,42.76Z"
+                    style="fill: #d38e05;opacity: 0.4699999988079071;isolation: isolate"/>
+                  <path d="M32.38,65.19V49.61h-7.8v4.8h3V65.19H23.26V70h13.5V65.19Z" style="fill: #fff"/>
+                  <path d="M42.18,33H37.87L20.14,0h4.33ZM21.47,33H17.72L0,0H3.75L21.46,33Z" style="fill: #6b6bd1"/>
+                  <path d="M37.91,33H21.47L3.75,0H20.14Z" style="fill: #fff"/>
+                </svg>
+                <div class="text-footer">
+                  <h3 class="silver">$20 cuc</h3>
+                  <p>en saldo + $40 cuc en bonos</p>
+                </div>
+              </div>
+              <div class="medal bronze">
+                <svg xmlns="http://www.w3.org/2000/svg" width="58" height="82.49" viewBox="0 0 58 82.49">
+                  <polygon points="34.3 0 17.18 31.76 36.25 31.61 40.75 31.9 57.86 0 34.3 0" style="fill: #c8c8cc"/>
+                  <polygon points="38.14 0 21.03 31.76 36.91 31.76 53.94 0 38.14 0" style="fill: #fff"/>
+                  <path
+                    d="M45.39,39.52V31.61A3.59,3.59,0,0,0,41.76,28H15.81a3.59,3.59,0,0,0-3.63,3.62h0v7.91a24.69,24.69,0,1,0,34.88,1.66,17.44,17.44,0,0,0-1.67-1.66ZM15.52,31.61c0-.14.07-.29.21-.29h26c.15,0,.29.07.29.22V36.9a24.63,24.63,0,0,0-26.46,0Z"
+                    style="fill: #ffd3ab"/>
+                  <circle cx="28.78" cy="57.79" r="19.36" style="fill: #e2a36f"/>
+                  <path d="M35.16,48.14h0l-13-.07v4.64h8.48v2.9H22.26v4.64h8.48v2.9H22.26v4.64h13l-.08-19.65Z"
+                        style="fill: #fff"/>
+                  <path
+                    d="M28.78,41.55A19.29,19.29,0,0,1,48,59.38a11.57,11.57,0,0,0,.07-1.59,19.32,19.32,0,1,0-38.64.07,12.63,12.63,0,0,0,.07,1.59A19.36,19.36,0,0,1,28.78,41.55Z"
+                    style="fill: #ce8651;opacity: 0.4699999988079071;isolation: isolate"/>
+                  <path d="M36.69,31.9H20.88L3.63,0h16Z" style="fill: #fff"/>
+                  <polygon points="40.75 31.9 23.64 0 19.43 0 36.62 31.9 40.75 31.9" style="fill: #c8c8cc"/>
+                  <polygon points="3.63 0 0 0 17.11 31.9 20.81 31.9 3.63 0" style="fill: #c8c8cc"/>
+                </svg>
+                <div class="text-footer">
+                  <h3 class="silver">5 horas</h3>
+                  <p>de Internet en tu cuenta Nauta</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="left-section" v-show="step === 'II'">
+        <div id="step-three-contest">
+          <div class="wrapper-header">
+            <div class="header-step">
+              <h4>Ya casi está listo</h4>
+              <p>Dales la luz a tus amigos. Recuerda cuantos más invites mayor probabilidad de ganar un premio.</p>
+            </div>
+          </div>
+          <div class="wrapper-body">
+            <div class="separator-inline"></div>
+            <div class="list-users-gmail">
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/1.jpg"/>
+                  <div class="text-container">
+                    <h4>Amaury Perez</h4>
+                    <span>amaury@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk1" type="checkbox" checked/><label for="chk1"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/8.jpg"/>
+                  <div class="text-container">
+                    <h4>Carlos Esteban Almirante</h4>
+                    <span>carlos@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk2" type="checkbox" checked/><label for="chk2"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/17.jpg"/>
+                  <div class="text-container">
+                    <h4>Yeni Lopez Martiatu</h4>
+                    <span>ylmartiy@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk3" type="checkbox" checked/><label for="chk3"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/6.jpg"/>
+                  <div class="text-container">
+                    <h4>Juan Pedro del Cielo</h4>
+                    <span>imgod@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk4" type="checkbox" checked/><label for="chk4"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/14.jpg"/>
+                  <div class="text-container">
+                    <h4>Juan Manuel Garcia</h4>
+                    <span>jmgarcia@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk5" type="checkbox" checked/><label for="chk5"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/4.jpg"/>
+                  <div class="text-container">
+                    <h4>Eladio Justino Martinez</h4>
+                    <span>ejustino@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk6" type="checkbox" checked/><label for="chk6"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/19.jpg"/>
+                  <div class="text-container">
+                    <h4>Maria Juana a la Sombra</h4>
+                    <span>maria@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk7" type="checkbox" checked/><label for="chk7"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/3.jpg"/>
+                  <div class="text-container">
+                    <h4>Zoilo Maximo </h4>
+                    <span>zolio@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk8" type="checkbox" checked/><label for="chk8"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/13.jpg"/>
+                  <div class="text-container">
+                    <h4>Ali Baba</h4>
+                    <span>alibaba@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk9" type="checkbox" checked/><label for="chk9"></label>
+              </div>
+
+              <div class="item-user-gmail">
+                <div class="info-user-wrapper">
+                  <img class="image-thum img-circle" src="img/user-avatar/20.jpg"/>
+                  <div class="text-container">
+                    <h4>Miguel Garcia</h4>
+                    <span>migue@gmail.com</span>
+                  </div>
+                </div>
+                <input class="chk" id="chk10" type="checkbox" checked/><label for="chk10"></label>
+              </div>
+
+            </div>
+            <div class="footer-gradient">
+              <div class="options-btns">
+                <div class="btn-area" v-on:click="generateClock()">
+                  <button class="btn-border-gradient">Continuar</button>
+                </div>
+                <div class="btn-area gray" v-on:click="goAhead('I', 'b')">
+                  <button class="btn-border-gradient">Regresar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-section"></div>
+
+    </div>
+    <div id="contest-ranking-view" v-else>
+      <div id="topper-ribbon">
+        <ul class="post-stats clearfix">
+          <li>
+            <div class="wrapper clearfix" v-on:click="scrollToSection('scroll-to-you')" data-toggle="tooltip"
+                 data-animation="false" data-placement="bottom" title="Clic para verte en el ranking">
+              <ul class="list-aplied">
+                <li>
+                  <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/10.jpg">
+                </li>
+              </ul>
+              <h3>#17
+                <small>Ranking</small>
+              </h3>
+            </div>
+          </li>
+          <li>
+            <div class="wrapper clearfix" v-on:click="scrollToSection('bottom-scroll')" data-toggle="tooltip"
+                 data-placement="bottom" title="Clic para ver los amigos que aceptaron tu invitación"
+                 data-animation="false">
+              <ul class="list-aplied">
+                <li>
+                  <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/17.jpg">
+                </li>
+                <li>
+                  <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/4.jpg">
+                </li>
+                <li>
+                  <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/13.jpg">
+                </li>
+              </ul>
+              <h3>4
+                <small>Contactos registrados</small>
+              </h3>
+            </div>
+          </li>
+          <li class="counter" id="counter-pg" data-toggle="tooltip" data-placement="bottom" title="Termina en 2 días">
+            <div class="text-zone">
+              <h3>2</h3>
+            </div>
+            <h3>
+              <small>days, 10 hours</small>
+            </h3>
+          </li>
+        </ul>
+      </div>
+      <div class="header-section">
+        <div class="container">
+          <h3>¡Enhorabuena! ya estás dentro del concurso
+            <svg class="emoticon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+              <path fill="#FFCC4D"
+                    d="M36 18c0 9.941-8.059 18-18 18-9.94 0-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/>
+              <ellipse fill="#664500" cx="11.5" cy="16.5" rx="2.5" ry="3.5"/>
+              <path fill="#664500"
+                    d="M28.457 17.797c-.06-.135-1.499-3.297-4.457-3.297-2.957 0-4.397 3.162-4.457 3.297-.092.207-.032.449.145.591.175.142.426.147.61.014.012-.009 1.262-.902 3.702-.902 2.426 0 3.674.881 3.702.901.088.066.194.099.298.099.11 0 .221-.037.312-.109.177-.142.238-.386.145-.594zM5.999 12.458c-.208 0-.419-.065-.599-.2-.442-.331-.531-.958-.2-1.4 3.262-4.35 7.616-4.4 7.8-4.4.552 0 1 .448 1 1 0 .551-.445.998-.996 1-.156.002-3.569.086-6.205 3.6-.195.262-.496.4-.8.4zm23.002 2.125c-.305 0-.604-.138-.801-.4-2.592-3.457-6.961-2.627-7.004-2.62-.547.108-1.068-.243-1.177-.784-.108-.542.243-1.068.784-1.177.231-.047 5.657-1.072 8.996 3.38.332.442.242 1.069-.2 1.4-.179.137-.389.201-.598.201zm-5.747 8.994c-.188-.11-.432-.087-.597.06-.01.008-1.013.863-4.657.863-3.641 0-4.646-.854-4.646-.854-.159-.16-.404-.19-.6-.082-.195.111-.293.339-.238.557.01.044 1.144 4.379 5.484 4.379s5.474-4.335 5.485-4.379c.053-.213-.044-.431-.231-.544z"/>
+            </svg>
+          </h3>
+          <p>Tus amigos ya saben de nosotros y confiamos en que muchos se registren, mientras tanto explora en tiempo
+            real como va la competencia.</p>
+          <div class="medals-wrapper">
+            <div class="medal-block silver">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.8" viewBox="0 0 80 113.8">
+                <polygon points="47.17 0 23.57 43.81 49.95 43.56 56.16 44.02 79.72 0 47.17 0" style="fill: #c8c8cc"/>
+                <polygon points="52.55 0 28.97 43.81 50.82 43.81 74.34 0 52.55 0" style="fill: #fff"/>
+                <path id="20a378de-b3b4-4fc6-abbe-02e5b27f91f7" data-name="c0cfcf2e-ac87-4d55-ba56-636416b12a64"
+                      d="M63,54.48V43.55a5,5,0,0,0-5-5H22.19a5,5,0,0,0-5,5h0V54.47A34.07,34.07,0,1,0,74.13,79.72,33.47,33.47,0,0,0,63,54.48ZM21.81,43.55a.38.38,0,0,1,.35-.39H58a.37.37,0,0,1,.38.35h0v7.38a34.09,34.09,0,0,0-36.54,0Z"
+                      style="fill: #bfbfbf"/>
+                <circle id="77b5db40-bfef-4e5b-b5e2-7149391d1cbd" data-name="0872fe14-a2cc-443c-afe6-aad88dfb7d90"
+                        cx="40.13" cy="79.72" r="26.7" style="fill: #a8a8a8"/>
+                <path id="ab2c757d-cd2c-4f04-a0a5-d2f650b1bb88" data-name="ba7b87cf-8360-44ac-ac4b-55dd62c0e4af"
+                      d="M42.74,66.25H31.12v6.38H42.74v4.08H31.12V93.34H49.06V87H37.44V82.91H49.06V66.25Z"
+                      style="fill: #fff"/>
+                <path id="4e3a1d49-0465-4fcd-ae81-b51b96e9018b" data-name="491b68fb-1192-4167-8be4-a1a12f8771ba"
+                      d="M50.51,44H28.66L5,0H26.89Z" style="fill: #fff"/>
+                <polygon points="56.16 44.02 32.52 0 26.76 0 50.46 44.02 56.16 44.02" style="fill: #c8c8cc"/>
+                <polygon points="4.91 0 -0.09 0 23.53 44.02 28.6 44.02 4.91 0" style="fill: #c8c8cc"/>
+                <path id="2a8192c6-e79a-49ea-9c29-461494e75ea6" data-name="b7ebded9-2279-4e13-88aa-7ece0edb0e4d"
+                      d="M40.13,57.25A26.66,26.66,0,0,1,66.67,81.8a19.49,19.49,0,0,0,.08-2.16,26.66,26.66,0,0,0-53.32.08h0a19.49,19.49,0,0,0,.08,2.16A26.78,26.78,0,0,1,40.13,57.25Z"
+                      style="fill: #878787;opacity: 0.41999998688697815;isolation: isolate"/>
+              </svg>
+              <div class="footer-stats">
+                <div class="user-info">
+                  <h4>marialopez</h4>
+                  <p>usuario</p>
+                </div>
+                <div class="stats-info">
+                  <h4>97</h4>
+                  <p>amigos registrados</p>
+                </div>
+              </div>
+            </div>
+            <div class="medal-block gold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.74" viewBox="0 0 80 113.74">
+                <path d="M23.74,44h5.39L30,42.33l19.81.19L50.53,44h5.85L79.92,0,47.63,0Z" style="fill: #6b6bd1"/>
+                <path d="M29.15,44H51L74.6,0H52.84Z" style="fill: #fff"/>
+                <path
+                  d="M57.84,66.22H22.08a5,5,0,0,1-5-4.95V43.53a5,5,0,0,1,4.94-5H57.84a5,5,0,0,1,5.06,4.93V61.22a5,5,0,0,1-5,5ZM22.08,43.15a.36.36,0,0,0-.38.33h0V61.22a.35.35,0,0,0,.31.38H57.84a.37.37,0,0,0,.39-.34h0V43.53a.36.36,0,0,0-.33-.38H22.08Z"
+                  style="fill: #ffbf1c"/>
+                <circle cx="40" cy="79.67" r="34.07" style="fill: #ffbf1c"/>
+                <circle cx="40" cy="79.67" r="26.69" style="fill: #efa500"/>
+                <path
+                  d="M40,57A26.65,26.65,0,0,1,66.53,81.57a19.23,19.23,0,0,0,.08-2.15,26.66,26.66,0,0,0-53.3.09,19.49,19.49,0,0,0,.08,2.16A26.69,26.69,0,0,1,40,57Z"
+                  style="fill: #d38e05;opacity: 0.4699999988079071;isolation: isolate"/>
+                <path d="M43.16,86.9V66.13H32.77v6.39h4V86.9H31v6.38H49V86.9Z" style="fill: #fff"/>
+                <path d="M56.22,44H50.48L26.85,0h5.77Zm-27.6,0h-5L0,0H5L28.61,44Z" style="fill: #6b6bd1"/>
+                <path d="M50.53,44H28.62L5,0H26.85Z" style="fill: #fff"/>
+              </svg>
+              <div class="footer-stats">
+                <div class="user-info">
+                  <h4>clsgarcia</h4>
+                  <p>usuario</p>
+                </div>
+                <div class="stats-info">
+                  <h4>100</h4>
+                  <p>amigos registrados</p>
+                </div>
+              </div>
+            </div>
+            <div class="medal-block bronze">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.8" viewBox="0 0 80 113.8">
+                <polygon points="47.36 0 23.76 43.82 50.13 43.56 56.34 44.02 79.92 0 47.36 0" style="fill: #c8c8cc"/>
+                <polygon points="52.74 0 29.14 43.82 51.01 43.82 74.52 0 52.74 0" style="fill: #fff"/>
+                <path
+                  d="M62.69,54.48V43.55a5,5,0,0,0-5-5H21.91a5,5,0,0,0-5,5h0V54.47A34.06,34.06,0,1,0,65,56.79c-.74-.8-1.5-1.57-2.31-2.31ZM21.53,43.55a.36.36,0,0,1,.34-.38H57.69a.37.37,0,0,1,.39.34v7.43a34.1,34.1,0,0,0-36.55,0Z"
+                  style="fill: #ffd3ab"/>
+                <circle cx="39.77" cy="79.73" r="26.7" style="fill: #e2a36f"/>
+                <path d="M48.62,66.41v-.07H30.76v6.37h11.7v4H30.76v6.38h11.7v4H30.76v6.38H48.7V66.41Z"
+                      style="fill: #fff"/>
+                <path
+                  d="M39.85,57.33A26.67,26.67,0,0,1,66.39,81.89a19.49,19.49,0,0,0,.08-2.16,26.66,26.66,0,0,0-53.32.08A19.23,19.23,0,0,0,13.22,82,26.64,26.64,0,0,1,39.85,57.33Z"
+                  style="fill: #ce8651;opacity: 0.4699999988079071;isolation: isolate"/>
+                <path d="M50.7,44H28.85L5.08,0h22Z" style="fill: #fff"/>
+                <polygon points="56.34 44.02 32.72 0 26.95 0 50.64 44.02 56.34 44.02" style="fill: #c8c8cc"/>
+                <polygon points="5.08 0 0.08 0 23.71 44.02 28.79 44.02 5.08 0" style="fill: #c8c8cc"/>
+              </svg>
+              <div class="footer-stats">
+                <div class="user-info">
+                  <h4>luismagar</h4>
+                  <p>usuario</p>
+                </div>
+                <div class="stats-info">
+                  <h4>90</h4>
+                  <p>amigos registrados</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-full-rank">
+        <div class="stats-ribbon">
+          <span class="rank-item">Rank</span>
+          <span class="fr-item">Freelancer</span>
+          <span class="friends-item">amigos registrados</span>
+        </div>
+        <div class="table-ranking-container">
+          <ul class="ranking-full-list">
+            <li class="gold-row" style="width: 100%">
+              <h3 class="rank-position">1</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/1.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">clsgarcia</h4>
+                  <span>100</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="silver-row" style="width: 97%">
+              <h3 class="rank-position">2</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/12.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">marialopez</h4>
+                  <span>97</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="bronze-row" style="width: 90%">
+              <h3 class="rank-position">3</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/15.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">luismagar</h4>
+                  <span>90</span>
+                </div>
+              </div>
+            </li>
+
+            <li style="width: 89%">
+              <h3 class="rank-position">4</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/14.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">josegarr</h4>
+                  <span>89</span>
+                </div>
+              </div>
+            </li>
+
+            <li style="width: 85%">
+              <h3 class="rank-position">5</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/18.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">claudiamar</h4>
+                  <span>85</span>
+                </div>
+              </div>
+            </li>
+
+            <li style="width: 83%">
+              <h3 class="rank-position">6</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/12.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">amaralisb</h4>
+                  <span>83</span>
+                </div>
+              </div>
+            </li>
+
+
+            <li style="width: 83%">
+              <h3 class="rank-position">7</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/7.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">juanjose</h4>
+                  <span>83</span>
+                </div>
+              </div>
+            </li>
+
+            <li style="width: 76%">
+              <h3 class="rank-position">8</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/14.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">bartolomeo</h4>
+                  <span>76</span>
+                </div>
+              </div>
+            </li>
+
+            <li style="width: 73%">
+              <h3 class="rank-position">9</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/6.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">andresjuan</h4>
+                  <span>73</span>
+                </div>
+              </div>
+            </li>
+
+
+            <li style="width: 69%">
+              <h3 class="rank-position">10</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/11.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">juliocub</h4>
+                  <span>69</span>
+                </div>
+              </div>
+            </li>
+
+            <li id="dots-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25.6" height="5.22" viewBox="0 0 25.6 5.22">
+                <circle cx="2.61" cy="2.62" r="2.61" style="fill: #d8d8d8"/>
+                <circle cx="12.8" cy="2.62" r="2.61" style="fill: #d8d8d8"/>
+                <circle cx="22.99" cy="2.62" r="2.61" style="fill: #d8d8d8"/>
+              </svg>
+            </li>
+
+            <li style="width: 17%" class="you-in-the-ranking" id="scroll-to-you">
+              <h3 class="rank-position">17</h3>
+              <img class="img-circle preloader" width="40" height="40" src="img/user-avatar/10.jpg">
+              <div class="overload-prevent">
+                <div>
+                  <h4 class="name-user">tu</h4>
+                  <span>4</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-futher-info">
+        <div class="user-registered-block">
+          <h4>Usuario registrados</h4>
+          <p>Estos son los amigos que se registraron atendiendo a tu invitación</p>
+          <ul class="list-registered">
+            <li>
+              <div class="image-user-container">
+                <img class="img-circle preloader" height="40" width="40" src="img/user-avatar/13.jpg">
+              </div>
+              <div class="sms-info">
+                <div class="line-up-text">
+                  <span class="name-user-list" title="Juan Esteban García">Juan Esteban García</span>
+                  <div>
+                    <abbr class="timestamp" title="Hace unos minutos">Hace unos minutos</abbr>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="image-user-container">
+                <img class="img-circle preloader" height="40" width="40" src="img/user-avatar/5.jpg">
+              </div>
+              <div class="sms-info">
+                <div class="line-up-text">
+                  <span class="name-user-list" title="Maria Elena Lopez">Maria Elena Lopez</span>
+                  <div>
+                    <abbr class="timestamp" title="Hace unos minutos">Ayer</abbr>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="image-user-container">
+                <img class="img-circle preloader" height="40" width="40" src="img/user-avatar/4.jpg">
+              </div>
+              <div class="sms-info">
+                <div class="line-up-text">
+                  <span class="name-user-list" title="Junior Mario Hernadez">Junior Mario Hernadez</span>
+                  <div>
+                    <abbr class="timestamp" title="Hace unos minutos">Ayer</abbr>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="bottom-scroll">
+              <div class="image-user-container">
+                <img class="img-circle preloader" height="45" width="45" src="img/user-avatar/17.jpg">
+              </div>
+              <div class="sms-info">
+                <div class="line-up-text">
+                  <span class="name-user-list" title="Rosa Elena Gracía">Rosa Elena Gracía</span>
+                  <div>
+                    <abbr class="timestamp" title="Hace unos minutos">Ayer</abbr>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="contest-info-block">
+          <h4>Premios</h4>
+          <p>Los ganadores serán anunciados el <span>viernes 21, 3pm </span>(hora de Cuba) en nuestra página en
+            Facebook.</p>
+
+          <div class="contest-info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.74" viewBox="0 0 80 113.74">
+              <path d="M23.74,44h5.39L30,42.33l19.81.19L50.53,44h5.85L79.92,0,47.63,0Z" style="fill: #6b6bd1"/>
+              <path d="M29.15,44H51L74.6,0H52.84Z" style="fill: #fff"/>
+              <path
+                d="M57.84,66.22H22.08a5,5,0,0,1-5-4.95V43.53a5,5,0,0,1,4.94-5H57.84a5,5,0,0,1,5.06,4.93V61.22a5,5,0,0,1-5,5ZM22.08,43.15a.36.36,0,0,0-.38.33h0V61.22a.35.35,0,0,0,.31.38H57.84a.37.37,0,0,0,.39-.34h0V43.53a.36.36,0,0,0-.33-.38H22.08Z"
+                style="fill: #ffbf1c"/>
+              <circle cx="40" cy="79.67" r="34.07" style="fill: #ffbf1c"/>
+              <circle cx="40" cy="79.67" r="26.69" style="fill: #efa500"/>
+              <path
+                d="M40,57A26.65,26.65,0,0,1,66.53,81.57a19.23,19.23,0,0,0,.08-2.15,26.66,26.66,0,0,0-53.3.09,19.49,19.49,0,0,0,.08,2.16A26.69,26.69,0,0,1,40,57Z"
+                style="fill: #d38e05;opacity: 0.4699999988079071;isolation: isolate"/>
+              <path d="M43.16,86.9V66.13H32.77v6.39h4V86.9H31v6.38H49V86.9Z" style="fill: #fff"/>
+              <path d="M56.22,44H50.48L26.85,0h5.77Zm-27.6,0h-5L0,0H5L28.61,44Z" style="fill: #6b6bd1"/>
+              <path d="M50.53,44H28.62L5,0H26.85Z" style="fill: #fff"/>
+            </svg>
+            <div class="text-block">
+              <h4>1er premio</h4>
+              <p>Una recarga en tu móvil con <br> 20 cuc en saldo + 40 cuc en bonos</p>
+            </div>
+          </div>
+          <div class="contest-info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.8" viewBox="0 0 80 113.8">
+              <polygon points="47.17 0 23.57 43.81 49.95 43.56 56.16 44.02 79.72 0 47.17 0" style="fill: #c8c8cc"/>
+              <polygon points="52.55 0 28.97 43.81 50.82 43.81 74.34 0 52.55 0" style="fill: #fff"/>
+              <path id="20a378de-b3b4-4fc6-abbe-02e5b27f91f7" data-name="c0cfcf2e-ac87-4d55-ba56-636416b12a64"
+                    d="M63,54.48V43.55a5,5,0,0,0-5-5H22.19a5,5,0,0,0-5,5h0V54.47A34.07,34.07,0,1,0,74.13,79.72,33.47,33.47,0,0,0,63,54.48ZM21.81,43.55a.38.38,0,0,1,.35-.39H58a.37.37,0,0,1,.38.35h0v7.38a34.09,34.09,0,0,0-36.54,0Z"
+                    style="fill: #bfbfbf"/>
+              <circle id="77b5db40-bfef-4e5b-b5e2-7149391d1cbd" data-name="0872fe14-a2cc-443c-afe6-aad88dfb7d90"
+                      cx="40.13" cy="79.72" r="26.7" style="fill: #a8a8a8"/>
+              <path id="ab2c757d-cd2c-4f04-a0a5-d2f650b1bb88" data-name="ba7b87cf-8360-44ac-ac4b-55dd62c0e4af"
+                    d="M42.74,66.25H31.12v6.38H42.74v4.08H31.12V93.34H49.06V87H37.44V82.91H49.06V66.25Z"
+                    style="fill: #fff"/>
+              <path id="4e3a1d49-0465-4fcd-ae81-b51b96e9018b" data-name="491b68fb-1192-4167-8be4-a1a12f8771ba"
+                    d="M50.51,44H28.66L5,0H26.89Z" style="fill: #fff"/>
+              <polygon points="56.16 44.02 32.52 0 26.76 0 50.46 44.02 56.16 44.02" style="fill: #c8c8cc"/>
+              <polygon points="4.91 0 -0.09 0 23.53 44.02 28.6 44.02 4.91 0" style="fill: #c8c8cc"/>
+              <path id="2a8192c6-e79a-49ea-9c29-461494e75ea6" data-name="b7ebded9-2279-4e13-88aa-7ece0edb0e4d"
+                    d="M40.13,57.25A26.66,26.66,0,0,1,66.67,81.8a19.49,19.49,0,0,0,.08-2.16,26.66,26.66,0,0,0-53.32.08h0a19.49,19.49,0,0,0,.08,2.16A26.78,26.78,0,0,1,40.13,57.25Z"
+                    style="fill: #878787;opacity: 0.41999998688697815;isolation: isolate"/>
+            </svg>
+            <div class="text-block">
+              <h4>2do premio</h4>
+              <p>Recarga 10 horas para tu cuenta Nauta</p>
+            </div>
+          </div>
+          <div class="contest-info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="113.8" viewBox="0 0 80 113.8">
+              <polygon points="47.36 0 23.76 43.82 50.13 43.56 56.34 44.02 79.92 0 47.36 0" style="fill: #c8c8cc"/>
+              <polygon points="52.74 0 29.14 43.82 51.01 43.82 74.52 0 52.74 0" style="fill: #fff"/>
+              <path
+                d="M62.69,54.48V43.55a5,5,0,0,0-5-5H21.91a5,5,0,0,0-5,5h0V54.47A34.06,34.06,0,1,0,65,56.79c-.74-.8-1.5-1.57-2.31-2.31ZM21.53,43.55a.36.36,0,0,1,.34-.38H57.69a.37.37,0,0,1,.39.34v7.43a34.1,34.1,0,0,0-36.55,0Z"
+                style="fill: #ffd3ab"/>
+              <circle cx="39.77" cy="79.73" r="26.7" style="fill: #e2a36f"/>
+              <path d="M48.62,66.41v-.07H30.76v6.37h11.7v4H30.76v6.38h11.7v4H30.76v6.38H48.7V66.41Z"
+                    style="fill: #fff"/>
+              <path
+                d="M39.85,57.33A26.67,26.67,0,0,1,66.39,81.89a19.49,19.49,0,0,0,.08-2.16,26.66,26.66,0,0,0-53.32.08A19.23,19.23,0,0,0,13.22,82,26.64,26.64,0,0,1,39.85,57.33Z"
+                style="fill: #ce8651;opacity: 0.4699999988079071;isolation: isolate"/>
+              <path d="M50.7,44H28.85L5.08,0h22Z" style="fill: #fff"/>
+              <polygon points="56.34 44.02 32.72 0 26.95 0 50.64 44.02 56.34 44.02" style="fill: #c8c8cc"/>
+              <polygon points="5.08 0 0.08 0 23.71 44.02 28.79 44.02 5.08 0" style="fill: #c8c8cc"/>
+            </svg>
+            <div class="text-block">
+              <h4>3er premio</h4>
+              <p>Recarga 5 horas para tu cuenta Nauta</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="small-footer">
+        <p>Promocion solo disponble para Cuba</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Another external dependencies -->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<script rel="preload" src="js/vendor/vue.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

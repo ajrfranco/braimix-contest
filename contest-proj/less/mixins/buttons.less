@@ -1,0 +1,99 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+.button-variant(@color; @background) {
+  color: @color;
+  background-color: @background;
+
+
+  // Alternate states
+  // --------------------------------------------------
+  &:hover,
+  &:focus,
+  .btn-group:focus &.dropdown-toggle {
+    background-color: darken(@background,20%);
+    color: @color;
+    outline: none;
+    .transition(0.25s);
+  }
+
+  // Active State
+  &:active,
+  .btn-group.open &.dropdown-toggle,
+  &.active {
+    background-color: darken(@background, 10%);
+    color: fade(@color, 50%);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: @background;
+    }
+  }
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}
+
+// Button sizes
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  border-radius: @border-radius;
+}
+
+
+
+.button-variant-wired(@color; @background) {
+  color: @background;
+  background-color: transparent;
+  border: 1px solid @background;
+  padding: 10px 25px;
+
+
+  // Alternate states
+  // --------------------------------------------------
+  &:hover,
+  &:focus,
+  .btn-group:focus &.dropdown-toggle {
+    background-color: @background;
+    color: @color;
+    outline: none;
+    border: 1px solid @background;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.13);
+    
+  }
+
+  // Active State
+  &:active,
+  .btn-group.open &.dropdown-toggle,
+  &.active {
+    top: 2px;
+    background-color: @background;
+    color: @color;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: @background;
+    }
+  }
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}
